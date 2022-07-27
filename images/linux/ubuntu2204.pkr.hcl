@@ -142,7 +142,7 @@ variable "virtual_network_subnet_name" {
 
 variable "vm_size" {
   type    = string
-  default = "Standard_D4s_v4"
+  default = "Standard_D2a_v4"
 }
 
 source "azure-arm" "build_vhd" {
