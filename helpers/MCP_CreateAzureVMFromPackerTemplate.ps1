@@ -1,4 +1,4 @@
-Function CreateAzureVMFromPackerTemplate {
+Function CreateAzureVMFromPackerTemplate-MCP {
     <#
         .SYNOPSIS
             A helper function to deploy a VM from a generated image.
@@ -27,8 +27,11 @@ Function CreateAzureVMFromPackerTemplate {
         .PARAMETER AzureLocation
             The location where the Azure virtual machine will be provisioned. Example: "eastus"
 
+        .PARAMETER SubnetId
+            The subnet name where the VM's NIC should be placed.
+
         .EXAMPLE
-            CreateAzureVMFromPackerTemplate -SubscriptionId {YourSubscriptionId} -ResourceGroupName {ResourceGroupName} -TemplateFile "C:\BuildVmImages\temporaryTemplate.json" -VirtualMachineName "testvm1" -AdminUsername "shady1" -AdminPassword "SomeSecurePassword1" -AzureLocation "eastus"
+            CreateAzureVMFromPackerTemplate-MCP -SubscriptionId {0805677a-fb2c-426d-aacf-2f55ec066d53} -ResourceGroupName {rgEastUS} -TemplateFile "C:\BuildVmImages\temporaryTemplate.json" -VirtualMachineName "eus-TADOAPP02" -AdminUsername "jagermeister" -AdminPassword "SomeSecurePassword1" -AzureLocation "eastus" -SubnetId "subAppEUs"
     #>
     param (
         [Parameter(Mandatory = $True)]
@@ -44,33 +47,26 @@ Function CreateAzureVMFromPackerTemplate {
         [Parameter(Mandatory = $True)]
         [string] $AdminPassword,
         [Parameter(Mandatory = $True)]
-        [string] $AzureLocation
+        [string] $AzureLocation,
+        [Parameter(Mandatory = $True)]
+        [string] $SubnetId
     )
 
-    $vmSize = "Standard_DS2_v2"
-    $guid = [System.GUID]::NewGuid().ToString().ToUpper()
-    $vnetName = $env:UserName + "vnet-" + $guid
-    $subnetName = $env:UserName + "subnet-" + $guid
-    $nicName = $env:UserName + "nic-" + $guid
-    $publicIpName = $env:UserName + "pip-" +  $guid
-
-    Write-Host "Creating a virtual network and subnet"
-    ($vnet = az network vnet create -g $ResourceGroupName -l $AzureLocation -n $vnetName --address-prefixes 10.0.0.0/16 --subnet-name $subnetName --subnet-prefixes 10.0.1.0/24 --subscription $subscriptionId -o json)
-    $subnetId = ($vnet | ConvertFrom-Json).newVNet.subnets[0].id
+    $vmSize = "Standard_D2as_v4"
+    $rand = ( Get-Random -Minimum 100 -Maximum 999 ).ToString('000')
+    $hostlower = $VirtualMachineName.ToLower()
+    $nicName = $hostlower + $rand    
 
     Write-Host "`nCreating a network interface controller (NIC)"
-    ($nic = az network nic create -g $ResourceGroupName -l $AzureLocation -n $nicName --subnet $subnetId --subscription $subscriptionId -o json)
+    ($nic = az network nic create -g $ResourceGroupName -l $AzureLocation -n $nicName --vnet-name "tomCLOUD" --subnet $subnetId --subscription $subscriptionId -o json)
     $networkId = ($nic | ConvertFrom-Json).NewNIC.id
 
-    Write-Host "`nCreating a public IP address"
-    ($publicIp = az network public-ip create -g $ResourceGroupName -l $AzureLocation -n $publicIpName --allocation-method Static --sku Basic --version IPv4 --subscription $subscriptionId -o json)
-    $publicIpId = ($publicIp | ConvertFrom-Json).publicIp.id
-
-    Write-Host "`nAdding the public IP to the NIC"
-    az network nic ip-config update -g $ResourceGroupName -n ipconfig1 --nic-name $nicName --public-ip-address $publicIpId --subscription $subscriptionId
+    pause
 
     Write-Host "`nCreating the VM"
     az deployment group create -g $ResourceGroupName -n $VirtualMachineName --subscription $subscriptionId --template-file $templateFilePath --parameters vmSize=$vmSize vmName=$VirtualMachineName adminUserName=$AdminUsername adminPassword=$AdminPassword networkInterfaceId=$networkId
 
-    Write-Host "`nCreated in ${ResourceGroupName}:`n  vnet ${vnetName}`n  subnet ${subnetName}`n  nic ${nicName}`n  publicip ${publicIpName}`n  vm ${VirtualMachineName}"
+    pause
+
+    Write-Host "`nCreated in ${ResourceGroupName}:`n  nic ${nicName}`n  vm ${VirtualMachineName}"
 }

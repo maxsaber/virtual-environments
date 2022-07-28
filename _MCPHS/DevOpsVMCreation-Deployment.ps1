@@ -50,7 +50,7 @@ GenerateResourcesAndImage -SubscriptionId {0805677a-fb2c-426d-aacf-2f55ec066d53}
 
 # Prep VHD to create Azure VM
 Set-Location C:\virtual-environments
-Import-Module .\helpers\CreateAzureVMFromPackerTemplate.ps1
+Import-Module .\helpers\MCP_CreateAzureVMFromPackerTemplate.ps1
 
 <#
 
@@ -68,9 +68,12 @@ Admin Password:         Password for the local administrator account.
     "SomeSecurePassword"    <<< Don't use standard format, change once VM is provisioned.
 Azure Location:         The location of the resources being created in Azure. For example "East US".
     "East US"
+Subnet ID:              Name of the subnet where the VM's NIC should be attached to.
+    "subAppEUs"
 
 Example:
-CreateAzureVMFromPackerTemplate -SubscriptionId {0805677a-fb2c-426d-aacf-2f55ec066d53}  -ResourceGroupName {rgEastUS} -TemplateFile "C:\BuildVmImages\temporaryTemplate.json" -VirtualMachineName "testvm1" -AdminUsername "jagermeister" -AdminPassword "SomeSecurePassword1" -AzureLocation "EastUS"
+CreateAzureVMFromPackerTemplate -SubscriptionId {0805677a-fb2c-426d-aacf-2f55ec066d53}  -ResourceGroupName {rgEastUS} -TemplateFile "C:\BuildVmImages\temporaryTemplate.json" -VirtualMachineName "testvm1" -AdminUsername "jagermeister" -AdminPassword "SomeSecurePassword1" -AzureLocation "EastUS" -subnetID "subAppEUs"
 
 #>
-CreateAzureVMFromPackerTemplate -SubscriptionId {0805677a-fb2c-426d-aacf-2f55ec066d53}  -ResourceGroupName {rgEastUS} -TemplateFile "C:\BuildVmImages\temporaryTemplate.json" -VirtualMachineName "testvm1" -AdminUsername "jagermeister" -AdminPassword "SomeSecurePassword1" -AzureLocation "EastUS"
+
+CreateAzureVMFromPackerTemplate-MCP -SubscriptionId {0805677a-fb2c-426d-aacf-2f55ec066d53}  -ResourceGroupName {rgEastUS} -TemplateFile "C:\virtual-environments\_MCPHS\packer-vmTemplate.768514a3-5903-44ae-aaca-ed8c0c93ea9b.json" -VirtualMachineName "eus-TADOAPP02" -AdminUsername "jagermeister" -AdminPassword "SomeSecurePassword1" -AzureLocation "EastUS" -subnetId "subAppEUs"
