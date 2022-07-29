@@ -1,0 +1,13 @@
+https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/
+https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/add-template-to-azure-pipelines?tabs=CLI
+
+https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-what-if?tabs=azure-powershell
+https://docs.microsoft.com/en-us/learn/paths/deploy-applications-with-azure-devops/
+
+
+https://docs.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-template?toc=%2Fazure%2Fazure-resource-manager%2Ftemplates%2Ftoc.json&view=azure-devops
+https://github.com/Azure/azure-quickstart-templates
+https://docs.microsoft.com/en-us/azure/virtual-machines/windows/tutorial-manage-vm
+https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-tutorial-create-first-template?tabs=azure-cli
+https://docs.microsoft.com/en-us/azure/devops/pipelines/library/connect-to-azure?view=azure-devops#use-spn
+https://docs.microsoft.com/en-us/azure/active-directory/develop/test-setup-environment
