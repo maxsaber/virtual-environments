@@ -1,6 +1,13 @@
+| Announcements |
+|-|
+| [[Windows] mongo service will be disabled by default on August, 8th](https://github.com/actions/virtual-environments/issues/5949) |
+| [[all OSs] Android NDK 21 will be replaced in favor of 25 on August, 1st](https://github.com/actions/virtual-environments/issues/5930) |
+| [[all OSs] Android ndk-bundle along with old NDK versions will be deprecated on July, 24](https://github.com/actions/virtual-environments/issues/5879) |
+| [[Azure DevOps] Windows-2016 environment removal postponed until July 31, 2022](https://github.com/actions/virtual-environments/issues/5403) |
+***
 # Microsoft Windows Server 2022 Datacenter
 - OS Version: 10.0.20348 Build 825
-- Image Version: dev
+- Image Version: 20220724.1
 
 ## Enabled windows optional features
 - Windows Subsystem for Linux [WSLv1]
@@ -21,14 +28,14 @@
 ### Package Management
 - Chocolatey 1.1.0
 - Composer 2.3.10
-- Helm 3.9.1
+- Helm 3.9.2
 - Miniconda 4.12.0 (pre-installed on the image but not added to PATH)
 - NPM 8.11.0
 - NuGet 6.2.1.2
 - pip 22.2.1 (python 3.9)
 - Pipx 1.1.0
 - RubyGems 3.2.33
-- Vcpkg (build from master \<e20e1c790>)
+- Vcpkg (build from master \<f93ba152d>)
 - Yarn 1.22.19
 
 #### Environment variables
@@ -50,11 +57,11 @@
 - Bazelisk 1.12.0
 - Bicep 0.8.9
 - Cabal 3.6.2.0
-- CMake 3.23.2
-- CodeQL Action Bundle 2.10.0
+- CMake 3.23.3
+- CodeQL Action Bundle 2.10.1
 - Docker 20.10.7
 - Docker Compose v1 1.29.2
-- Docker Compose v2 2.7.0
+- Docker Compose v2 2.8.0
 - Docker-wincred 0.6.4
 - ghc 9.2.3
 - Git 2.37.1.windows.1
@@ -83,7 +90,7 @@
 
 ### CLI Tools
 - Alibaba Cloud CLI 3.0.124
-- AWS CLI 2.7.18
+- AWS CLI 2.7.20
 - AWS SAM CLI 1.53.0
 - AWS Session Manager CLI 1.2.339.0
 - Azure CLI 2.38.0
@@ -110,7 +117,7 @@
 - Chrome Driver 103.0.5060.134
 - Microsoft Edge 103.0.1264.71
 - Microsoft Edge Driver 103.0.1264.71
-- Mozilla Firefox 103.0
+- Mozilla Firefox 102.0.1
 - Gecko Driver 0.31.0
 - IE Driver 3.150.1.1
 - Selenium server 4.3.0
@@ -199,9 +206,9 @@ Note: MSYS2 is pre-installed on image but not added to PATH.
 | Password             | root                                                                                                                                 |
 
 #### MongoDB
-| Version | ServiceName | ServiceStatus | ServiceStartType |
-| ------- | ----------- | ------------- | ---------------- |
-| 5.0.9.0 | MongoDB     | Running       | Automatic        |
+| Version  | ServiceName | ServiceStatus | ServiceStartType |
+| -------- | ----------- | ------------- | ---------------- |
+| 5.0.10.0 | MongoDB     | Running       | Automatic        |
 
 ### Database tools
 - Azure CosmosDb Emulator 2.14.9.0
@@ -528,7 +535,7 @@ All other versions are saved but not installed.
 #### Powershell Modules
 | Module             | Version          |
 | ------------------ | ---------------- |
-| AWSPowerShell      | 4.1.135          |
+| AWSPowerShell      | 4.1.132          |
 | DockerMsftProvider | 1.0.0.8          |
 | MarkdownPS         | 1.9              |
 | Microsoft.Graph    | 1.10.0           |
@@ -558,7 +565,7 @@ All other versions are saved but not installed.
 | Name                    | Value                                   |
 | ----------------------- | --------------------------------------- |
 | ANDROID_HOME            | C:\Android\android-sdk                  |
-| ANDROID_NDK_LATEST_HOME | C:\Android\android-sdk\ndk\25.0.8775105 |
+| ANDROID_NDK_LATEST_HOME | C:\Android\android-sdk\ndk\24.0.8215888 |
 | ANDROID_SDK_ROOT        | C:\Android\android-sdk                  |
 
 ### Cached Docker images
