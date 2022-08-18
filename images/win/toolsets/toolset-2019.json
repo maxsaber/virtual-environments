@@ -72,7 +72,6 @@
             "arch": "x64",
             "platform" : "win32",
             "versions": [
-                "1.16.*",
                 "1.17.*",
                 "1.18.*",
                 "1.19.*"
@@ -325,6 +324,7 @@
             "Microsoft.VisualStudio.Component.VC.MFC.ARM64",
             "Microsoft.VisualStudio.Component.VC.MFC.ARM64.Spectre",
             "Microsoft.VisualStudio.Component.VC.Modules.x86.x64",
+            "Microsoft.VisualStudio.Component.VC.Tools.ARM64EC",
             "Microsoft.VisualStudio.Component.VC.Redist.MSM",
             "Microsoft.VisualStudio.Component.VC.Runtimes.ARM.Spectre",
             "Microsoft.VisualStudio.Component.VC.Runtimes.ARM64.Spectre",
