@@ -27,6 +27,12 @@ echo "Validate the installation reloading /etc/environment"
 reloadEtcEnvironment
 
 # Install additional brew packages
+
+# brew GCC installation needed because the default Ubuntu components
+# are too old for current brew software
+# See:
+# https://github.com/Homebrew/homebrew-core/issues/110877
+
 brew_packages=$(get_toolset_value .brew[].name)
 for package in $brew_packages; do
     echo "Install $package"
@@ -36,5 +42,11 @@ for package in $brew_packages; do
         find $(brew --prefix)/bin -name *zstd* -exec sudo sh -c 'ln -s {} /usr/local/bin/$(basename {})' ';'
     fi
 done
+
+gfortran=$(brew --prefix)/bin/gfortran
+# Remove gfortran symlink, not to conflict with system gfortran
+if [[ -e $gfortran ]]; then
+    rm $gfortran
+fi
 
 invoke_tests "Tools" "Homebrew"
