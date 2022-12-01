@@ -1,4 +1,4 @@
-# Pushing to multiple Git repositories
+git# Pushing to multiple Git repositories
 
 ## add additional Git push repository called "DevOps" to existing Git repository
 
